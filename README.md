@@ -1,110 +1,112 @@
-#### Note: This project is a submission under Google Solution Challenge 2026.
+# Flutter
 
-# Sahi Bin – AI-Powered Waste Segregation System
-<br>
+A modern Flutter-based mobile application utilizing the latest mobile development technologies and tools for building responsive cross-platform applications.
 
-## Overview
+## 📋 Prerequisites
 
-Sahi Bin is an AI-driven waste management system designed to improve waste segregation at the household level. It uses QR codes + image classification to ensure citizens dispose of waste correctly and encourages behavior change through a reward and penalty system.
+- Flutter SDK (^3.38.4)
+- Dart SDK
+- Android Studio / VS Code with Flutter extensions
+- Android SDK / Xcode (for iOS development)
 
-## Problem
+## 🛠️ Installation
 
-Improper waste segregation is a major issue in India:
+1. Install dependencies:
+```bash
+flutter pub get
+```
 
-Mixed waste reduces recycling efficiency
-Lack of accountability at household level
-No incentives for correct behavior
-Increased landfill and pollution
+2. Run the application:
+```bash
+flutter run
+```
 
-## Solution
+## 📁 Project Structure
 
-Sahi Bin introduces a smart monitoring system where:
+```
+flutter_app/
+├── android/            # Android-specific configuration
+├── ios/                # iOS-specific configuration
+├── lib/
+│   ├── core/           # Core utilities and services
+│   │   └── utils/      # Utility classes
+│   ├── presentation/   # UI screens and widgets
+│   │   └── splash_screen/ # Splash screen implementation
+│   ├── routes/         # Application routing
+│   ├── theme/          # Theme configuration
+│   ├── widgets/        # Reusable UI components
+│   └── main.dart       # Application entry point
+├── assets/             # Static assets (images, fonts, etc.)
+├── pubspec.yaml        # Project dependencies and configuration
+└── README.md           # Project documentation
+```
 
-Each household has a QR-coded bin
-Workers scan QR codes during collection
-Waste is verified using AI image classification
-Citizens receive rewards or penalties based on segregation quality
+## 🧩 Adding Routes
 
-## How It Works
+To add new routes to the application, update the `lib/routes/app_routes.dart` file:
 
-Worker logs into the Sahi Bin app
-Garbage vehicle reaches households
-Worker scans QR code on bin
-Worker captures image of waste
-AI classifies waste:
-Wet
-Dry
-Mixed
-Data is stored in database
-System assigns:
-Rewards (correct segregation)
-Penalties (mixed waste)
+```dart
+import 'package:flutter/material.dart';
+import 'package:package_name/presentation/home_screen/home_screen.dart';
 
-## Features
+class AppRoutes {
+  static const String initial = '/';
+  static const String home = '/home';
 
-QR-based household identification
-AI-powered waste classification
-Reward & penalty mechanism
-Eeal-time data tracking
-Worker-friendly mobile interface
-Scalable for city-level deployment
+  static Map<String, WidgetBuilder> routes = {
+    initial: (context) => const SplashScreen(),
+    home: (context) => const HomeScreen(),
+    // Add more routes as needed
+  }
+}
+```
 
-## Tech Stack
+## 🎨 Theming
 
-### Frontend:
+This project includes a comprehensive theming system with both light and dark themes:
 
-HTML, CSS, JavaScript / React
+```dart
+// Access the current theme
+ThemeData theme = Theme.of(context);
 
-### Backend:
+// Use theme colors
+Color primaryColor = theme.colorScheme.primary;
+```
 
-Node.js / Firebase
+The theme configuration includes:
+- Color schemes for light and dark modes
+- Typography styles
+- Button themes
+- Input decoration themes
+- Card and dialog themes
 
-### Database:
+## 📱 Responsive Design
 
-Firestore / MongoDB
+The app is built with responsive design using the Sizer package:
 
-### AI/ML:
+```dart
+// Example of responsive sizing
+Container(
+  width: 50.w, // 50% of screen width
+  height: 20.h, // 20% of screen height
+  child: Text('Responsive Container'),
+)
+```
+## 📦 Deployment
 
-TensorFlow / Teachable Machine
+Build the application for production:
 
-### Other:
+```bash
+# For Android
+flutter build apk --release
 
-QR Code Integration
-Camera API
+# For iOS
+flutter build ios --release
+```
 
-## System Architecture
+## 🙏 Acknowledgments
+- Built with [Rocket.new](https://rocket.new)
+- Powered by [Flutter](https://flutter.dev) & [Dart](https://dart.dev)
+- Styled with Material Design
 
-User (Citizen)
-      ↓
-QR Code (Household ID)
-      ↓
-Worker App (Scan + Capture Image)
-      ↓
-Backend Server
-      ↓
-AI Model (Waste Classification)
-      ↓
-Database (Store Data)
-      ↓
-Reward / Penalty System
-      ↓
-Notification to User
-
-## Impact
-
-Improves waste segregation at source
-Reduces landfill burden
-Enables data-driven waste management
-Encourages long-term behavioral change
-
-## Future Scope
-
-Integration with municipal systems
-Tax benefits for high-performing households
-Advanced AI for detailed waste categories
-Multilingual support (Hindi, Marathi, etc.)
-Route optimization for garbage vehicles
-
-## Summary
-
-“Sahi Bin is submitted under Open Innovation in Smart Resource Allocation as it introduces an AI-driven system for improving waste segregation at the source. By combining QR-based tracking with image-based classification, the solution ensures efficient identification and allocation of waste resources, promoting sustainable urban management.”
+Built with ❤️ on Rocket.new
