@@ -1,0 +1,1352 @@
+/* ================================================================
+   SAHI BIN — WORKER SCREENS
+   Dashboard, QR scan, classify, results, performance, route
+   ================================================================ */
+
+
+/* ================================================================
+   1. WORKER GREETING
+   ================================================================ */
+
+.worker-greeting {
+  margin-bottom: var(--space-xl);
+}
+
+.worker-greeting__hello {
+  font-size: 0.875rem;
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+  margin-bottom: 2px;
+}
+
+.worker-greeting__name {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: var(--fw-black);
+  font-style: italic;
+  line-height: 1.2;
+  margin-bottom: var(--space-sm);
+}
+
+.worker-greeting__shift {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.8125rem;
+  font-weight: var(--fw-bold);
+}
+
+.worker-greeting__shift .status-dot {
+  width: 8px;
+  height: 8px;
+}
+
+
+/* ================================================================
+   2. WORKER PROGRESS CARD (AAJ KA KAAM)
+   ================================================================ */
+
+.worker-progress-card {
+  background: var(--color-primary);
+  border: var(--border-brutalist);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-brutalist);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.worker-progress-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.worker-progress-card::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 40px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.worker-progress-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+  position: relative;
+  z-index: 1;
+}
+
+.worker-progress-card__label {
+  font-size: 0.6875rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+}
+
+.worker-progress-card__count {
+  font-size: 0.875rem;
+  font-weight: var(--fw-bold);
+}
+
+.worker-progress-card__progress {
+  height: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+  position: relative;
+  z-index: 1;
+}
+
+.worker-progress-card__progress-fill {
+  height: 100%;
+  background: white;
+  border-radius: 6px;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.worker-progress-card__progress-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4));
+  border-radius: 6px;
+}
+
+.worker-progress-card__stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  opacity: 0.8;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ================================================================
+   3. WORKER STAT TILES (GEELA / SOOKHA)
+   ================================================================ */
+
+.worker-stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.worker-stats-row--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.worker-stat-tile {
+  border: var(--border-brutalist);
+  border-radius: var(--radius);
+  padding: var(--space-base) var(--space-md);
+  text-align: center;
+  box-shadow: var(--shadow-brutalist-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.worker-stat-tile:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px var(--color-border);
+}
+
+.worker-stat-tile--wet {
+  background: var(--color-success-bg);
+}
+
+.worker-stat-tile--dry {
+  background: var(--color-info-bg);
+}
+
+.worker-stat-tile--mixed {
+  background: var(--color-warning-bg);
+}
+
+.worker-stat-tile--danger {
+  background: var(--color-danger-bg);
+}
+
+.worker-stat-tile__icon {
+  width: 28px;
+  height: 28px;
+  margin: 0 auto var(--space-xs);
+}
+
+.worker-stat-tile__value {
+  font-size: 1.75rem;
+  font-weight: var(--fw-black);
+  font-style: italic;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.worker-stat-tile__label {
+  font-size: 0.625rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+}
+
+
+/* ================================================================
+   4. SCAN CTA BUTTON
+   ================================================================ */
+
+.scan-cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  width: 100%;
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--color-primary);
+  color: white;
+  border: var(--border-brutalist);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-brutalist);
+  font-size: 1.125rem;
+  font-weight: var(--fw-extrabold);
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  margin-bottom: var(--space-lg);
+  min-height: 64px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scan-cta-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px var(--color-border);
+}
+
+.scan-cta-btn svg {
+  width: 28px;
+  height: 28px;
+}
+
+.scan-cta-btn--pulse {
+  animation: ctaPulse 2s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: var(--shadow-brutalist); }
+  50%      { box-shadow: var(--shadow-brutalist), 0 0 0 4px rgba(27, 107, 60, 0.2); }
+}
+
+
+/* ================================================================
+   5. NEXT STOP BAR
+   ================================================================ */
+
+.next-stop-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-base);
+  background: var(--color-card);
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-base);
+}
+
+.next-stop-bar__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--color-info-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.next-stop-bar__icon svg {
+  width: 20px;
+  height: 20px;
+  color: var(--color-accent);
+}
+
+.next-stop-bar__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.next-stop-bar__label {
+  font-size: 0.625rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.next-stop-bar__address {
+  font-size: 0.875rem;
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.next-stop-bar__arrow {
+  width: 20px;
+  height: 20px;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+
+/* ================================================================
+   6. QR VIEWFINDER
+   ================================================================ */
+
+.qr-viewfinder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 320px;
+  margin: 0 auto var(--space-xl);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #000;
+}
+
+.qr-viewfinder video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Scanning overlay */
+.qr-viewfinder__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Scanning frame in center */
+.qr-viewfinder__frame {
+  width: 220px;
+  height: 220px;
+  position: relative;
+}
+
+/* Animated scan line */
+.qr-viewfinder__scanline {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background: var(--color-primary);
+  box-shadow: 0 0 8px rgba(27, 107, 60, 0.6);
+  animation: scanLine 2s ease-in-out infinite;
+}
+
+@keyframes scanLine {
+  0%, 100% { top: 10px; }
+  50%      { top: calc(100% - 12px); }
+}
+
+/* Corner semi-transparent mask around frame */
+.qr-viewfinder__mask {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(0,0,0,0.6) 0, rgba(0,0,0,0.6) calc(50% - 110px), transparent calc(50% - 110px), transparent calc(50% + 110px), rgba(0,0,0,0.6) calc(50% + 110px)),
+    linear-gradient(to bottom, rgba(0,0,0,0.6) 0, rgba(0,0,0,0.6) calc(50% - 110px), transparent calc(50% - 110px), transparent calc(50% + 110px), rgba(0,0,0,0.6) calc(50% + 110px));
+  background-blend-mode: darken;
+  pointer-events: none;
+}
+
+
+/* ================================================================
+   7. QR CORNERS (Green L-shaped brackets)
+   ================================================================ */
+
+.qr-corners {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Top-left corner */
+.qr-corners::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border-top: 4px solid var(--color-primary);
+  border-left: 4px solid var(--color-primary);
+  border-top-left-radius: 4px;
+}
+
+/* Top-right corner */
+.qr-corners::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-top: 4px solid var(--color-primary);
+  border-right: 4px solid var(--color-primary);
+  border-top-right-radius: 4px;
+}
+
+/* Bottom corners using a helper element */
+.qr-corners__bottom {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Bottom-left corner */
+.qr-corners__bottom::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border-bottom: 4px solid var(--color-primary);
+  border-left: 4px solid var(--color-primary);
+  border-bottom-left-radius: 4px;
+}
+
+/* Bottom-right corner */
+.qr-corners__bottom::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-bottom: 4px solid var(--color-primary);
+  border-right: 4px solid var(--color-primary);
+  border-bottom-right-radius: 4px;
+}
+
+
+/* ================================================================
+   8. CAPTURE BUTTON (Camera shutter)
+   ================================================================ */
+
+.capture-btn {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  border: 4px solid var(--color-border);
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  position: relative;
+  transition: transform 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: var(--shadow-brutalist);
+}
+
+.capture-btn:active {
+  transform: scale(0.92);
+  box-shadow: var(--shadow-brutalist-sm);
+}
+
+.capture-btn__inner {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.capture-btn__inner svg {
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+/* Capture button disabled state */
+.capture-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Camera controls row */
+.camera-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: var(--space-xl) var(--space-base);
+}
+
+.camera-control-btn {
+  width: var(--touch-target);
+  height: var(--touch-target);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-border);
+  background: var(--color-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.camera-control-btn:active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.camera-control-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+
+/* ================================================================
+   9. CLASSIFICATION SELECTOR
+   ================================================================ */
+
+.classification-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.classification-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-md);
+  border: var(--border-brutalist);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-brutalist-sm);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+  min-height: 100px;
+  background: var(--color-card);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.classification-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px var(--color-border);
+}
+
+.classification-btn__icon {
+  width: 36px;
+  height: 36px;
+}
+
+.classification-btn__label {
+  font-size: 0.8125rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.classification-btn__hindi {
+  font-size: 0.6875rem;
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+}
+
+/* Waste type variants */
+.classification-btn--wet,
+.classification-btn--wet.classification-btn--selected {
+  background: var(--color-success-bg);
+  border-color: #2E7D32;
+}
+
+.classification-btn--dry,
+.classification-btn--dry.classification-btn--selected {
+  background: var(--color-info-bg);
+  border-color: #1565C0;
+}
+
+.classification-btn--mixed,
+.classification-btn--mixed.classification-btn--selected {
+  background: var(--color-warning-bg);
+  border-color: #F57F17;
+}
+
+/* Selected state (highlighted stronger) */
+.classification-btn--selected {
+  box-shadow: var(--shadow-brutalist);
+  transform: translateY(-2px);
+}
+
+/* Unselected when another is selected (dimmed) */
+.classification-btn--dimmed {
+  opacity: 0.4;
+}
+
+
+/* ================================================================
+   10. SEGREGATION TOGGLE (SAHI / GALAT)
+   ================================================================ */
+
+.segregation-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.segregation-toggle__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-base);
+  border: var(--border-brutalist);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-brutalist-sm);
+  cursor: pointer;
+  min-height: 80px;
+  font-weight: var(--fw-bold);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  background: var(--color-card);
+}
+
+.segregation-toggle__btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px var(--color-border);
+}
+
+.segregation-toggle__btn svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* SAHI (correct) */
+.segregation-toggle__btn--sahi {
+  color: var(--color-text);
+}
+
+.segregation-toggle__btn--sahi.segregation-toggle__btn--selected {
+  background: var(--color-success-bg);
+  border-color: #2E7D32;
+  color: #1B5E20;
+}
+
+/* GALAT (wrong) */
+.segregation-toggle__btn--galat {
+  color: var(--color-text);
+}
+
+.segregation-toggle__btn--galat.segregation-toggle__btn--selected {
+  background: var(--color-danger-bg);
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.segregation-toggle__btn--dimmed {
+  opacity: 0.4;
+}
+
+
+/* ================================================================
+   11. AI PROCESSING OVERLAY
+   ================================================================ */
+
+.ai-processing-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 5000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  color: white;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.ai-processing-overlay__animation {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Scanning ring animation */
+.ai-processing-overlay__ring {
+  position: absolute;
+  inset: 0;
+  border: 3px solid transparent;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.ai-processing-overlay__ring:nth-child(2) {
+  inset: 8px;
+  border-top-color: var(--color-success-light);
+  animation-duration: 1.5s;
+  animation-direction: reverse;
+}
+
+.ai-processing-overlay__ring:nth-child(3) {
+  inset: 16px;
+  border-top-color: rgba(255, 255, 255, 0.3);
+  animation-duration: 2s;
+}
+
+.ai-processing-overlay__icon {
+  width: 40px;
+  height: 40px;
+  color: var(--color-primary);
+  z-index: 1;
+}
+
+.ai-processing-overlay__text {
+  font-size: 1.125rem;
+  font-weight: var(--fw-bold);
+  text-align: center;
+}
+
+.ai-processing-overlay__subtext {
+  font-size: 0.875rem;
+  opacity: 0.7;
+  text-align: center;
+}
+
+/* Dot loading animation */
+.ai-processing-overlay__dots {
+  display: flex;
+  gap: 6px;
+}
+
+.ai-processing-overlay__dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+  animation: dotBounce 1.4s ease-in-out infinite;
+}
+
+.ai-processing-overlay__dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.ai-processing-overlay__dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0.4); opacity: 0.4; }
+  40%           { transform: scale(1);   opacity: 1; }
+}
+
+
+/* ================================================================
+   12. RESULT IMAGE CONTAINER
+   ================================================================ */
+
+.result-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: var(--border-brutalist);
+  margin-bottom: var(--space-lg);
+  background: #f0f0f0;
+}
+
+.result-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Badge overlay on image */
+.result-image-container__badge {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.result-image-container__badge--correct {
+  background: var(--color-success);
+  color: white;
+}
+
+.result-image-container__badge--incorrect {
+  background: var(--color-danger);
+  color: white;
+}
+
+/* Verification indicators on image */
+.result-image-container__indicators {
+  position: absolute;
+  bottom: var(--space-md);
+  left: var(--space-md);
+  display: flex;
+  gap: var(--space-xs);
+}
+
+
+/* ================================================================
+   13. RESULT TYPE CARD
+   ================================================================ */
+
+.result-type-card {
+  border: var(--border-brutalist);
+  border-radius: var(--radius);
+  padding: var(--space-xl);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-brutalist);
+}
+
+.result-type-card--wet {
+  background: var(--color-success-bg);
+}
+
+.result-type-card--dry {
+  background: var(--color-info-bg);
+}
+
+.result-type-card--mixed {
+  background: var(--color-warning-bg);
+}
+
+.result-type-card__icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto var(--space-md);
+}
+
+.result-type-card__type {
+  font-size: 1.5rem;
+  font-weight: var(--fw-black);
+  font-style: italic;
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+}
+
+.result-type-card__hindi {
+  font-size: 1rem;
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+}
+
+.result-type-card__confidence {
+  margin-top: var(--space-md);
+  font-size: 0.8125rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-text-secondary);
+}
+
+
+/* ================================================================
+   14. SUCCESS CHECKMARK (Animated)
+   ================================================================ */
+
+.success-checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--space-xl) auto;
+}
+
+.success-checkmark__circle {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--color-success-bg);
+  border: var(--border-brutalist);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: checkPop 0.5s ease;
+}
+
+.success-checkmark__circle svg {
+  width: 40px;
+  height: 40px;
+  color: var(--color-primary);
+}
+
+.success-checkmark__circle--danger {
+  background: var(--color-danger-bg);
+}
+
+.success-checkmark__circle--danger svg {
+  color: var(--color-danger);
+}
+
+@keyframes checkPop {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Checkmark SVG path animation */
+.success-checkmark__path {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: drawCheck 0.5s ease 0.3s forwards;
+}
+
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+
+/* ================================================================
+   15. PERFORMANCE HERO CARD
+   ================================================================ */
+
+.performance-hero {
+  background: var(--color-primary-dark);
+  border: var(--border-brutalist);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-brutalist);
+  padding: var(--space-xl);
+  color: white;
+  margin-bottom: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.performance-hero::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.performance-hero__title {
+  font-size: 0.6875rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  margin-bottom: var(--space-md);
+  position: relative;
+  z-index: 1;
+}
+
+.performance-hero__score {
+  font-size: 3rem;
+  font-weight: var(--fw-black);
+  font-style: italic;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+  position: relative;
+  z-index: 1;
+}
+
+.performance-hero__label {
+  font-size: 0.875rem;
+  font-weight: var(--fw-medium);
+  opacity: 0.8;
+  position: relative;
+  z-index: 1;
+}
+
+.performance-hero__trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: var(--space-sm);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: var(--fw-bold);
+  background: rgba(255, 255, 255, 0.15);
+  position: relative;
+  z-index: 1;
+}
+
+.performance-hero__trend svg {
+  width: 14px;
+  height: 14px;
+}
+
+
+/* ================================================================
+   16. ACHIEVEMENT CARD
+   ================================================================ */
+
+.achievement-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-base);
+  background: var(--color-card);
+  border: var(--border-brutalist);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-brutalist-sm);
+  margin-bottom: var(--space-md);
+}
+
+.achievement-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  background: var(--color-warning-bg);
+}
+
+.achievement-card__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.achievement-card__title {
+  font-weight: var(--fw-bold);
+  font-size: 0.9375rem;
+  margin-bottom: 2px;
+}
+
+.achievement-card__description {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.achievement-card__progress {
+  margin-top: var(--space-sm);
+}
+
+.achievement-card--locked {
+  opacity: 0.5;
+}
+
+.achievement-card--unlocked {
+  background: var(--color-warning-bg);
+  border-color: #F57F17;
+}
+
+
+/* ================================================================
+   17. HOUSE QUEUE ITEM
+   ================================================================ */
+
+.house-queue-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-base);
+  background: var(--color-card);
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  min-height: var(--touch-target);
+}
+
+.house-queue-item:active {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.house-queue-item--active {
+  border-color: var(--color-primary);
+  background: var(--color-success-bg);
+}
+
+.house-queue-item--completed {
+  opacity: 0.5;
+}
+
+.house-queue-item__number {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--fw-bold);
+  font-size: 0.8125rem;
+  flex-shrink: 0;
+  background: var(--color-card);
+}
+
+.house-queue-item--completed .house-queue-item__number {
+  background: var(--color-success);
+  color: white;
+  border-color: var(--color-success);
+}
+
+.house-queue-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.house-queue-item__name {
+  font-weight: var(--fw-medium);
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.house-queue-item__address {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.house-queue-item__status {
+  flex-shrink: 0;
+}
+
+
+/* ================================================================
+   18. HOUSEHOLD DETAIL CARD
+   ================================================================ */
+
+.household-detail-card {
+  background: var(--color-card);
+  border: var(--border-brutalist);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-brutalist);
+  overflow: hidden;
+  margin-bottom: var(--space-lg);
+}
+
+.household-detail-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border-bottom: 2px solid var(--color-divider);
+}
+
+.household-detail-card__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  color: white;
+  font-weight: var(--fw-bold);
+  font-size: 1.125rem;
+  flex-shrink: 0;
+}
+
+.household-detail-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.household-detail-card__name {
+  font-weight: var(--fw-bold);
+  font-size: 1rem;
+}
+
+.household-detail-card__id {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-family: monospace;
+}
+
+.household-detail-card__body {
+  padding: var(--space-lg);
+}
+
+.household-detail-card__stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+}
+
+
+/* ================================================================
+   19. ROUTE OVERVIEW
+   ================================================================ */
+
+.route-overview {
+  background: var(--color-card);
+  border: var(--border-brutalist);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-brutalist);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.route-overview__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.route-overview__title {
+  font-weight: var(--fw-extrabold);
+  font-style: italic;
+  font-size: 1.125rem;
+}
+
+.route-overview__stats {
+  display: flex;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.route-overview__stat {
+  text-align: center;
+}
+
+.route-overview__stat-value {
+  font-size: 1.25rem;
+  font-weight: var(--fw-black);
+  font-style: italic;
+}
+
+.route-overview__stat-label {
+  font-size: 0.625rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+}
+
+/* Route progress line */
+.route-overview__progress-line {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: var(--space-md);
+}
+
+.route-overview__progress-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background: var(--color-card);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.route-overview__progress-dot--completed {
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.route-overview__progress-dot--current {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(27, 107, 60, 0.2);
+}
+
+.route-overview__progress-segment {
+  flex: 1;
+  height: 3px;
+  background: var(--color-border-light);
+}
+
+.route-overview__progress-segment--completed {
+  background: var(--color-success);
+}
+
+
+/* ================================================================
+   20. SCAN INSTRUCTION
+   ================================================================ */
+
+.scan-instruction {
+  text-align: center;
+  padding: var(--space-base);
+  margin-bottom: var(--space-lg);
+}
+
+.scan-instruction__title {
+  font-size: 1.125rem;
+  font-weight: var(--fw-extrabold);
+  font-style: italic;
+  margin-bottom: var(--space-xs);
+}
+
+.scan-instruction__text {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+/* Manual entry fallback */
+.scan-manual-entry {
+  text-align: center;
+  padding: var(--space-base);
+}
+
+.scan-manual-entry__link {
+  font-size: 0.875rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-accent);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

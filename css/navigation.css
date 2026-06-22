@@ -1,0 +1,574 @@
+/* ================================================================
+   SAHI BIN — NAVIGATION
+   App header, bottom nav, slide menu, back button
+   ================================================================ */
+
+
+/* ================================================================
+   1. APP HEADER
+   ================================================================ */
+
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--max-width);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-base);
+  background: var(--color-card);
+  border-bottom: var(--border-brutalist);
+  z-index: 1000;
+}
+
+.app-header__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-width: 0;
+  flex: 1;
+}
+
+.app-header__center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.app-header__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.app-header__title {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-black);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.app-header__subtitle {
+  font-size: 0.75rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-text-secondary);
+  margin-left: var(--space-xs);
+}
+
+.app-header__menu {
+  width: var(--touch-target);
+  height: var(--touch-target);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+
+.app-header__menu:active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.app-header__menu svg {
+  width: 24px;
+  height: 24px;
+  color: var(--color-text);
+}
+
+.app-header__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  color: white;
+  font-weight: var(--fw-bold);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.app-header__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Header action buttons */
+.app-header__action {
+  width: var(--touch-target);
+  height: var(--touch-target);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: var(--radius-sm);
+  position: relative;
+}
+
+.app-header__action:active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.app-header__action svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Notification dot on header action */
+.app-header__action .badge-count {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  min-width: 16px;
+  height: 16px;
+  font-size: 0.5625rem;
+  padding: 0 4px;
+}
+
+/* Role badge inline with header */
+.role-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.625rem;
+  font-weight: var(--fw-extrabold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.role-badge--worker {
+  background: var(--color-accent);
+  color: white;
+}
+
+.role-badge--citizen {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Header with transparent bg (for special screens) */
+.app-header--transparent {
+  background: transparent;
+  border-bottom: none;
+}
+
+.app-header--transparent .app-header__title {
+  color: white;
+}
+
+.app-header--transparent .app-header__menu svg {
+  color: white;
+}
+
+/* Header with colored bg */
+.app-header--primary {
+  background: var(--color-primary);
+  border-bottom-color: var(--color-primary-dark);
+}
+
+.app-header--primary .app-header__title {
+  color: white;
+}
+
+.app-header--primary .app-header__menu svg,
+.app-header--primary .app-header__action svg {
+  color: white;
+}
+
+
+/* ================================================================
+   2. BOTTOM NAVIGATION
+   ================================================================ */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--max-width);
+  height: var(--nav-height);
+  display: flex;
+  align-items: stretch;
+  background: var(--color-card);
+  border-top: var(--border-brutalist);
+  z-index: 1000;
+}
+
+.bottom-nav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-size: 0.625rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: none;
+  border: none;
+  min-height: var(--touch-target);
+  padding: var(--space-xs) 0;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+.bottom-nav__item--active {
+  background: var(--color-primary);
+  color: white;
+  border-radius: 0;
+}
+
+.bottom-nav__item:active:not(.bottom-nav__item--active) {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.bottom-nav__item svg,
+.bottom-nav__icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.bottom-nav__label {
+  font-size: 0.5625rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+/* Notification badge on nav item */
+.bottom-nav__item .badge-count {
+  position: absolute;
+  top: 6px;
+  right: 50%;
+  transform: translateX(calc(50% + 10px));
+  min-width: 16px;
+  height: 16px;
+  font-size: 0.5625rem;
+  padding: 0 4px;
+}
+
+/* Center action button (e.g., scan button) */
+.bottom-nav__item--center {
+  position: relative;
+}
+
+.bottom-nav__item--center .bottom-nav__icon-wrap {
+  position: relative;
+  top: -8px;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  border: var(--border-brutalist);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-brutalist-sm);
+}
+
+.bottom-nav__item--center .bottom-nav__icon-wrap svg {
+  color: white;
+}
+
+.bottom-nav__item--center .bottom-nav__label {
+  margin-top: -4px;
+}
+
+
+/* ================================================================
+   3. SLIDE MENU (Hamburger Drawer)
+   ================================================================ */
+
+.slide-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--color-card);
+  border-right: var(--border-brutalist);
+  z-index: 2000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.slide-menu--open {
+  transform: translateX(0);
+}
+
+.slide-menu__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding-bottom: var(--space-xl);
+  border-bottom: 2px solid var(--color-divider);
+  margin-bottom: var(--space-lg);
+}
+
+.slide-menu__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  border: var(--border-brutalist);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  color: white;
+  font-weight: var(--fw-bold);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.slide-menu__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide-menu__user-info {
+  min-width: 0;
+}
+
+.slide-menu__name {
+  font-weight: var(--fw-bold);
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.slide-menu__role {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+/* Menu items */
+.slide-menu__nav {
+  flex: 1;
+}
+
+.slide-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-weight: var(--fw-medium);
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  min-height: var(--touch-target);
+  -webkit-tap-highlight-color: transparent;
+  color: var(--color-text);
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.slide-menu__item:active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.slide-menu__item--active {
+  background: var(--color-success-bg);
+  color: var(--color-primary);
+  font-weight: var(--fw-bold);
+}
+
+.slide-menu__item svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.slide-menu__item--danger {
+  color: var(--color-danger);
+}
+
+.slide-menu__divider {
+  height: 1px;
+  background: var(--color-divider);
+  margin: var(--space-md) 0;
+}
+
+/* Menu footer */
+.slide-menu__footer {
+  margin-top: auto;
+  padding-top: var(--space-lg);
+  border-top: 2px solid var(--color-divider);
+}
+
+.slide-menu__version {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: var(--space-md);
+}
+
+/* Overlay behind the drawer */
+.slide-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.slide-menu-overlay--open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* ================================================================
+   4. BACK BUTTON
+   ================================================================ */
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: none;
+  border: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--color-text);
+  min-height: var(--touch-target);
+  min-width: var(--touch-target);
+  padding: var(--space-sm);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  -webkit-tap-highlight-color: transparent;
+  transition: background var(--transition-fast);
+}
+
+.back-button:active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.back-button svg {
+  width: 22px;
+  height: 22px;
+}
+
+.back-button__text {
+  font-weight: var(--fw-medium);
+}
+
+
+/* ================================================================
+   5. BREADCRUMB (for nested screens)
+   ================================================================ */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  padding: var(--space-sm) 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.breadcrumb__item {
+  color: var(--color-text-muted);
+}
+
+.breadcrumb__item--active {
+  color: var(--color-text);
+  font-weight: var(--fw-medium);
+}
+
+.breadcrumb__separator {
+  color: var(--color-border-light);
+}
+
+
+/* ================================================================
+   6. PAGE HEADER (in-content header for sub-screens)
+   ================================================================ */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.page-header__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-success-bg);
+  flex-shrink: 0;
+}
+
+.page-header__icon svg {
+  width: 22px;
+  height: 22px;
+  color: var(--color-primary);
+}
+
+.page-header__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.page-header__title {
+  font-size: 1.25rem;
+  font-weight: var(--fw-extrabold);
+  font-style: italic;
+}
+
+.page-header__description {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}

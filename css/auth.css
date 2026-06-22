@@ -1,0 +1,578 @@
+/* ================================================================
+   SAHI BIN — AUTH SCREENS
+   Role selection, login form, OTP input
+   ================================================================ */
+
+
+/* ================================================================
+   1. ROLE SELECTION PAGE
+   ================================================================ */
+
+.role-select-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--space-3xl) var(--space-xl) var(--space-xl);
+  background: var(--color-bg);
+}
+
+/* Dustbin icon container */
+.role-select-page__icon-container {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--radius-lg);
+  background: var(--color-success-bg);
+  border: var(--border-brutalist);
+  box-shadow: var(--shadow-brutalist);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+  animation: gentleBounce 3s ease-in-out infinite;
+}
+
+.role-select-page__icon-container svg {
+  width: 56px;
+  height: 56px;
+  color: var(--color-primary);
+}
+
+@keyframes gentleBounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+/* Main heading */
+.role-select-page__heading {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-weight: var(--fw-black);
+  font-style: italic;
+  color: var(--color-primary);
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: var(--space-sm);
+}
+
+.role-select-page__subheading {
+  font-size: 1rem;
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+/* "Aap kaun hain?" label */
+.role-select-page__question {
+  font-size: 0.875rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  width: 100%;
+  text-align: left;
+}
+
+
+/* ================================================================
+   2. ROLE CARDS
+   ================================================================ */
+
+.role-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-base);
+  width: 100%;
+}
+
+.role-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  min-height: 100px;
+  padding: var(--space-xl) var(--space-lg);
+  border: var(--border-brutalist);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-brutalist);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.role-card:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px var(--color-border);
+}
+
+/* Citizen variant (green) */
+.role-card--citizen {
+  background: var(--color-primary);
+  color: white;
+}
+
+.role-card--citizen .role-card__subtitle {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Worker variant (blue) */
+.role-card--worker {
+  background: var(--color-accent);
+  color: white;
+}
+
+.role-card--worker .role-card__subtitle {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Admin variant (white/outlined) */
+.role-card--admin {
+  background: var(--color-card);
+  color: var(--color-text);
+}
+
+.role-card--admin .role-card__subtitle {
+  color: var(--color-text-secondary);
+}
+
+/* Role card icon */
+.role-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.role-card--admin .role-icon {
+  background: var(--color-success-bg);
+}
+
+.role-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Role card content */
+.role-card__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.role-card__title {
+  font-size: 1.25rem;
+  font-weight: var(--fw-extrabold);
+  font-style: italic;
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.role-card__subtitle {
+  font-size: 0.8125rem;
+  font-weight: var(--fw-medium);
+  line-height: 1.3;
+}
+
+/* Arrow indicator */
+.role-card__arrow {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+/* Decorative pattern on role cards */
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.role-card::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+
+/* ================================================================
+   3. HELP BAR
+   ================================================================ */
+
+.help-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: auto;
+  padding-top: var(--space-3xl);
+  width: 100%;
+}
+
+.help-bar__text {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.help-bar__link {
+  font-size: 0.8125rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-accent);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.help-bar__link:active {
+  opacity: 0.7;
+}
+
+
+/* ================================================================
+   4. LOGIN FORM
+   ================================================================ */
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--space-xl);
+  background: var(--color-bg);
+}
+
+.login-page__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.login-page__back {
+  width: var(--touch-target);
+  height: var(--touch-target);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.login-page__back:active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.login-page__back svg {
+  width: 24px;
+  height: 24px;
+}
+
+.login-page__title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: var(--fw-black);
+  font-style: italic;
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+.login-page__description {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-2xl);
+}
+
+.login-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form__phone-wrapper {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.login-form__country-code {
+  width: 72px;
+  padding: var(--space-md) var(--space-sm);
+  border: var(--border-brutalist);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: var(--fw-bold);
+  text-align: center;
+  background: var(--color-card);
+  min-height: var(--touch-target);
+  color: var(--color-text);
+  flex-shrink: 0;
+}
+
+.login-form__phone-input {
+  flex: 1;
+  padding: var(--space-md) var(--space-base);
+  border: var(--border-brutalist);
+  border-radius: var(--radius-sm);
+  font-size: 1.125rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.05em;
+  background: var(--color-card);
+  min-height: var(--touch-target);
+  color: var(--color-text);
+}
+
+.login-form__phone-input::placeholder {
+  color: var(--color-text-muted);
+  font-weight: var(--fw-regular);
+  letter-spacing: normal;
+}
+
+.login-form__phone-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(27, 107, 60, 0.15);
+  outline: none;
+}
+
+.login-form__submit {
+  margin-top: auto;
+}
+
+/* Terms text */
+.login-form__terms {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.5;
+  margin-top: var(--space-lg);
+}
+
+.login-form__terms a {
+  color: var(--color-accent);
+  font-weight: var(--fw-medium);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+
+/* ================================================================
+   5. OTP INPUT
+   ================================================================ */
+
+.otp-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--space-xl);
+  background: var(--color-bg);
+}
+
+.otp-page__phone-display {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-card);
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  font-weight: var(--fw-bold);
+  font-size: 0.9375rem;
+  margin-bottom: var(--space-2xl);
+}
+
+.otp-page__phone-display .edit-link {
+  font-size: 0.75rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-accent);
+  cursor: pointer;
+  margin-left: var(--space-xs);
+}
+
+.otp-input-group {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+}
+
+.otp-box {
+  width: 48px;
+  height: 56px;
+  border: var(--border-brutalist);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: var(--fw-extrabold);
+  background: var(--color-card);
+  color: var(--color-text);
+  caret-color: var(--color-primary);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  -webkit-appearance: none;
+}
+
+.otp-box:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(27, 107, 60, 0.2);
+}
+
+.otp-box--filled {
+  background: var(--color-success-bg);
+  border-color: var(--color-primary);
+}
+
+.otp-box--error {
+  border-color: var(--color-danger);
+  background: var(--color-danger-bg);
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-4px); }
+  50%      { transform: translateX(4px); }
+  75%      { transform: translateX(-4px); }
+}
+
+/* Resend OTP */
+.otp-resend {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.otp-resend__timer {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  font-weight: var(--fw-medium);
+}
+
+.otp-resend__timer strong {
+  color: var(--color-text);
+  font-weight: var(--fw-bold);
+}
+
+.otp-resend__btn {
+  font-size: 0.875rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-accent);
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: var(--space-sm);
+  min-height: var(--touch-target);
+}
+
+.otp-resend__btn:disabled {
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.otp-resend__btn:active:not(:disabled) {
+  opacity: 0.7;
+}
+
+
+/* ================================================================
+   6. AUTH LOADING STATES
+   ================================================================ */
+
+.auth-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3xl);
+  gap: var(--space-lg);
+}
+
+.auth-loading__spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--color-border-light);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.auth-loading__text {
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+
+/* ================================================================
+   7. AUTH WELCOME ANIMATION
+   ================================================================ */
+
+.auth-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--space-xl);
+  text-align: center;
+  animation: screenFadeIn 0.5s ease;
+}
+
+.auth-welcome__checkmark {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--color-success-bg);
+  border: var(--border-brutalist);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+  animation: checkmarkPop 0.5s ease 0.2s both;
+}
+
+.auth-welcome__checkmark svg {
+  width: 40px;
+  height: 40px;
+  color: var(--color-primary);
+}
+
+@keyframes checkmarkPop {
+  0%   { transform: scale(0); }
+  70%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.auth-welcome__title {
+  font-size: 1.75rem;
+  font-weight: var(--fw-black);
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.auth-welcome__subtitle {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
